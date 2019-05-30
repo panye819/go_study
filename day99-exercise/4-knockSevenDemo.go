@@ -13,7 +13,7 @@ func main() {
 			time.Sleep(time.Duration(1) * time.Second)
 		} else {
 			fmt.Println(i)
-			time.Sleep(time.Duration(1) * time.Second)
+			//time.Sleep(time.Duration(1) * time.Second)
 		}
 	}
 }
