@@ -3,16 +3,15 @@ package main
 import "fmt"
 
 func main() {
-	arr := [5]int{11, 2, 333, 44, 5}
-	fmt.Println(arr)
-	for i := 0; i < len(arr)-1; i++ {
-		//fmt.Println(arr[i])
-		for j := 0; j < len(arr)-1-i; j++ {
-			if arr[j] > arr[j+1] {
-				arr[j], arr[j+1] = arr[j+1], arr[j]
-			}
-		}
-	}
-	fmt.Println("After ")
-	fmt.Println(arr)
+	var a = 10
+	//&取地址运算符，通过运算符可以打印变量所在的内存地址
+	fmt.Printf("%p\n", &a)
+	//在基本类型前加*表示指针类型
+	var p *int
+	p = &a
+	fmt.Println(*p)
+	a = 20
+	//*称为取值运算符
+	fmt.Println(*p)
+
 }
