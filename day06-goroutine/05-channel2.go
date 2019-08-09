@@ -1,41 +1,22 @@
 package main
 
-import (
-	"fmt"
-	"time"
-)
+import "fmt"
 
-/*
-	需求：
-		计算1-200的各个数的阶乘，并且把各个数的阶乘放入到map中，最后显示出来。
-		要求使用goroutine完成
-*/
-
-//思路：
-//	1、编写一个函数，来计算各个数的阶乘，并放入到map中
-//	2、我们启动的协程多个，统计的将结果放入到map中
-//	3、map应该做出一个全局的
-
-var (
-	myMap = make(map[int]int, 10)
-)
-
-func test2(n int) {
-	res := 1
-	for i := 1; i <= n; i++ {
-		res *= i
-	}
-	myMap[n] = res
-}
 func main() {
-	for i := 1; i <= 200; i++ {
-		go test2(i)
-	}
-	//休眠10秒钟
-	time.Sleep(time.Second * 10)
-	//输出结果
-	for i, v := range myMap {
-		fmt.Printf("map[%d]=%d\n", i, v)
-		time.Sleep(time.Second * 1)
-	}
+	//创建一个可以存放三个int类型的管道
+	var intChan chan int
+	intChan = make(chan int, 3)
+
+	//2、看看intChan是什么
+
+	fmt.Printf("intChan 的值=%v intChan本身的地址=%p\n", intChan, &intChan)
+	fmt.Println()
+	//3、向管道中写入数据
+	intChan <- 10
+	num := 211
+	intChan <- num
+
+	//4、看看管道的长度和容量
+	fmt.Printf("intChan的长度=%d intChan本身的容量=%d\n", len(intChan), cap(intChan))
+
 }
