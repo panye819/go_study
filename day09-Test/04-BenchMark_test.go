@@ -12,33 +12,35 @@ import (
 如果没有在TestMian中调用m.Run()，则除了TestMain以外的tests都不会被执行
 
 */
-func Print1to20() int {
+func Print1to20m() int {
 	res := 0
 	for i := 0; i <= 20; i++ {
 		res += i
 	}
 	return res
 }
-func testPrint(t *testing.T) {
-	res := Print1to20()
+func testPrint3(t *testing.T) {
+	res := Print1to20m()
 	fmt.Println("Hey")
 	if res != 210 {
 		t.Errorf("Wrong result of Print1to20")
 	}
 }
-func testPrint2(t *testing.T) {
-	res := Print1to20()
+func testPrint4(t *testing.T) {
+	res := Print1to20m()
 	res++
 	if res != 211 {
 		t.Errorf("Test print2 Failed")
 	}
 }
-func TestALL(t *testing.T) {
-	t.Run("TestPrint", testPrint)
-	t.Run("TestPrint2", testPrint2)
+func TestALL2(t *testing.T) {
+	t.Run("TestPrint", testPrint3)
+	t.Run("TestPrint2", testPrint4)
 }
 
-func TestMain(m *testing.M) {
-	fmt.Println("Tests begins...")
-	m.Run()
+func BenchmarkAll(b *testing.B) {
+	for n := 0; n < b.N; n++ {
+		Print1to20m()
+	}
+
 }
